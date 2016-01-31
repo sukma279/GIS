@@ -1,0 +1,510 @@
+################################################################################################ 
+# Adapt settings in map file <tt>pmapper_demo.map</tt> for the following tags to match settings
+# on your machine (see additionally MapServer documentation for detailed information):
+#
+#  MAP
+#    SHAPEPATH 
+#    FONTSET
+#    SYMBOLSET
+#  
+#  WEB
+#    IMAGEPATH  
+#    IMAGEURL    
+#
+##################################################################################################
+
+#
+# Start of map file  
+#
+MAP
+EXTENT  389896.47 9091925.60 482524.18 9167474.28
+ 
+#UNITS meters
+#EXTENT -15 30 40 70
+UNITS meters
+SIZE 600 500
+SHAPEPATH "../../../pmapper_demodata"
+SYMBOLSET "../common/symbols/symbols-pmapper.sym"   
+FONTSET "../common/fonts/msfontset.txt" 
+RESOLUTION 96
+IMAGETYPE png
+INTERLACE OFF
+#CONFIG "PROJ_LIB" "C:/proj/nad/"
+PROJECTION
+  # ETRS-LAEA
+  #"init=epsg:3035"
+  "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+END  
+
+
+
+#
+# Start of web interface definition
+#
+WEB
+  TEMPLATE "map.html"
+  IMAGEPATH "/ms4w/tmp/ms_tmp/"
+  IMAGEURL "/ms_tmp/"
+  METADATA
+    #"MAPFILE_ENCODING" "ISO-8859-1" 
+    #"ows_title"     "WMS Demo Server"  
+    #"ows_onlineresource" "http://wms.yourserver.org?owskey=test&"   
+    #"ows_srs"       "EPSG:3035 EPSG:4326"  
+  END  # Metadata
+END  # Web
+
+#
+# Start of Reference map definition
+#
+REFERENCE
+  EXTENT 389896.47 9091925.60 482524.18 9167474.28
+  IMAGE "../../images/reference.png"
+  SIZE 199 149
+  COLOR -1 -1 -1
+  OUTLINECOLOR 255 0 0
+END  # Reference
+
+
+#
+# Start of legend object
+#
+LEGEND
+	STATUS OFF
+	IMAGECOLOR 255 255 255
+#	OUTLINECOLOR 0 0 0
+	POSITION ll
+	KEYSIZE 18 12
+	KEYSPACING 10 5 
+	TEMPLATE "void"
+	LABEL
+		TYPE TRUETYPE
+		FONT "FreeSans"
+		SIZE small
+		POSITION AUTO
+		COLOR 0 0 89
+		OUTLINECOLOR 255 255 255
+		ANTIALIAS TRUE
+	END
+END
+
+#
+# Start of ScaleBar definition
+#
+SCALEBAR
+  STATUS off
+  TRANSPARENT off
+  INTERVALS 4
+  SIZE 200 3
+  UNITS kilometers
+  COLOR 250 250 250
+  OUTLINECOLOR 0 0 0
+  BACKGROUNDCOLOR 100 100 100
+  STYLE 0
+  POSTLABELCACHE true
+  LABEL
+    COLOR 0 0 90
+    #OUTLINECOLOR 200 200 200
+    SIZE small
+  END  # Label
+END  # Reference
+
+
+
+# SYMBOLS USED IN PMAPPER
+# - 'circle' always necessary (used e.g. for highlight)
+# - 'square' used in currecnt map file
+# Symbols can also be defined via tag SYMBOLSET (see above)
+Symbol
+  Name 'circle'
+  Type ELLIPSE
+  Filled TRUE
+  Points
+    1 1
+  END
+END 
+
+Symbol
+  Name 'square'
+  Type VECTOR
+  Filled TRUE
+  Points
+    0 1
+    0 0
+    1 0
+    1 1
+    0 1
+  END
+END
+
+
+#================== START OF LAYER SECTION =====================#
+
+
+LAYER
+  NAME "provinsi"
+  LABELITEM "kabupaten"
+  TYPE polygon
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.kabupaten__region USING UNIQUE gid"
+  TRANSPARENCY 30
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Provinsi DIY"
+    
+  END
+  CLASS
+	Name 'Kulon Progo'
+	EXPRESSION ([gid] == 1)
+	COLOR 251 254 3
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 51
+	 OUTLINECOLOR 255 255 255
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+  CLASS
+	Name 'Bantul'
+	EXPRESSION ([gid] == 2)
+	COLOR 254 103 3
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 51
+	 OUTLINECOLOR 255 255 255
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+  CLASS
+	Name 'Sleman'
+	EXPRESSION ([gid] == 3)
+	COLOR 254 3 222
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 51
+	 OUTLINECOLOR 255 255 255
+	 BUFFER 2
+	 OUTLINECOLOR 255 255 255
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+  CLASS
+	Name 'Gunung Kidul'
+	EXPRESSION ([gid] == 4)
+	COLOR 4 84 15
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 51
+	 OUTLINECOLOR 255 255 255
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+  CLASS
+	Name 'Yogyakarta'
+	EXPRESSION ([gid] == 5)
+	COLOR 0 0 102
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 51
+	 OUTLINECOLOR 255 255 255
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+END
+
+
+
+
+#
+# Jalan
+#
+LAYER
+  NAME "jalan"
+  TYPE line
+  LABELITEM "jalan"
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.jalan__polyline USING UNIQUE gid"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Jalan Provinsi"
+  END
+  CLASS
+	Name 'Jalan Provinsi'
+	COLOR 255 0 0
+	SIZE 5
+	LABEL 
+	POSITION AUTO
+	 COLOR 255 69 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+
+
+
+#
+# Rel
+#
+LAYER
+  NAME "rel"
+  TYPE line
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.rel_ka_polyline USING UNIQUE gid"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Jalur Kereta"
+  END
+  CLASS
+	Name 'Rel Kereta Api'
+	COLOR 0 0 128
+	SIZE 5
+	LABEL 
+	POSITION AUTO
+	 COLOR 0 150 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+
+#
+# Sungai
+#
+LAYER
+  NAME "sungai"
+  TYPE line
+  LABELITEM "sungai"
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.sungai__polyline USING UNIQUE gid"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Sungai"
+  END
+  CLASS
+	Name 'Sungai'
+	COLOR 77 10 52
+	SIZE 5
+	LABEL 
+	POSITION AUTO
+	 COLOR 255 69 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+#
+# pantai
+#
+LAYER
+  NAME "pantai"
+  TYPE point
+  LABELITEM "pantai"
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.pantai__font_point USING UNIQUE gid"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Pantai"
+  END
+  CLASS
+	Name 'Pantai'
+	SYMBOL 'circle'
+	SIZE 9
+	COLOR 0 0 128
+	LABEL 
+	POSITION AUTO
+	 COLOR 0 150 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+#
+# goa
+#
+LAYER
+  NAME "goa"
+  TYPE point
+  LABELITEM "goa"
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.goa__font_point USING UNIQUE gid"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Goa"
+  END
+  CLASS
+	Name 'Goa'
+	SYMBOL 'square'
+	SIZE 9
+	COLOR 0 128 128
+	LABEL 
+	POSITION AUTO
+	 COLOR 128 0 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+
+LAYER
+  NAME "jalan_kecamatan"
+  TYPE line
+  LABELITEM "label"
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.jalan"
+  FILTER "label LIKE '%Jl. %'"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=longlat +datum=WGS84 +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Jalan Kecamatan"
+    
+  END
+  CLASS
+	Name 'Jalan Kecamatan'
+	COLOR 0 255 150
+	LABEL 
+	POSITION AUTO
+	 COLOR 0 150 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+END
+END
+
+LAYER
+  NAME "kecamatan"
+  LABELITEM "kecamatan"
+  TYPE polygon
+  STATUS ON
+  CONNECTIONTYPE POSTGIS
+  CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
+  DATA "geom FROM public.admin_kecamatan USING UNIQUE gid"
+  TRANSPARENCY 30
+  TEMPLATE void
+  PROJECTION
+    #"init=epsg:4326"
+    "+proj=longlat +datum=WGS84 +no_defs"
+  END
+  METADATA
+    "DESCRIPTION" "Kecamatan"
+    
+  END
+  CLASS
+	Name 'DIY'
+	COLOR 200 254 199
+	OUTLINECOLOR 0 0 0
+	LABEL 
+	 POSITION AUTO
+	 COLOR 0 0 0
+	 BUFFER 2
+	 TYPE TRUETYPE 
+	 ENCODING "UTF-8"
+	 FONT FreeSans
+	 SIZE 8
+	END
+  END
+END
+
+
+
+
+END  #Map
