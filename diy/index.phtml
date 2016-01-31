@@ -8,7 +8,11 @@ if (isset($_REQUEST['config'])) {
         $startFile = "map.phtml?config=$config";
     }
 } else {
+<<<<<<< HEAD
     $startFile = "home.html";
+=======
+    $startFile = "map_default.phtml";
+>>>>>>> origin/master
 }
 
 header("Location: $startFile");

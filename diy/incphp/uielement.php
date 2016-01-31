@@ -266,7 +266,13 @@ class UiElement
         $pmLogoTitle = array_key_exists('pmLogoTitle', $_SESSION) ? $_SESSION['pmLogoTitle'] : "p.mapper homepage";
         $pmLogoSrc = array_key_exists('pmLogoSrc', $_SESSION) ? $_SESSION['pmLogoSrc'] : "images/logos/logo-black.png";
         $pmVersion = array_key_exists('version', $_SESSION) ? ", v" . $_SESSION['version'] : "";
+<<<<<<< HEAD
         $pmHeading = array_key_exists('pmHeading', $_SESSION) ? $_SESSION['pmHeading'] : "<a href=\"http://mapserver.gis.umn.edu\" id=\"mshref_1\" title=\"UMN MapServer homepage\" onclick=\"this.target = '_new';\">Sistem Informasi Geografis Daerah Istimewa Yogyakarta</a>&nbsp"; 
+=======
+        $pmHeading = array_key_exists('pmHeading', $_SESSION) ? $_SESSION['pmHeading'] : "<a href=\"http://mapserver.gis.umn.edu\" id=\"mshref_1\" title=\"UMN MapServer homepage\" onclick=\"this.target = '_new';\">MapServer</a>&nbsp; 
+                            <a href=\"http://www.dmsolutions.ca\" id=\"dmsol_href\" title=\"DM Solutions homepage\" onclick=\"this.target = '_new';\">PHP/MapScript</a>&nbsp; 
+                            Framework$pmVersion";
+>>>>>>> origin/master
         
         $html = "<div class=\"pm-header\"><div><a href=\"$pmLogoUrl\" 
                     title=\"$pmLogoTitle\" onclick=\"this.target = '_blank';\">
