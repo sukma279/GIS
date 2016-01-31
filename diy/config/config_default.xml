@@ -1,11 +1,7 @@
 <pmapper>
     <ini>
         <pmapper>
-<<<<<<< HEAD
             <pmTitle>Sistem Informasi Geografis Daerah Istimewa Yogyakarta</pmTitle>
-=======
-            <pmTitle>p.mapper - A MapServer PHP/MapScript Framework</pmTitle>
->>>>>>> origin/master
             <debugLevel>3</debugLevel>
             <plugins>export</plugins>
             <plugins>scalebar</plugins>
@@ -23,7 +19,6 @@
             <tplMapFile>common/template.map</tplMapFile>
             <categories>
                 <category name="cat_admin">
-<<<<<<< HEAD
                     <group>provinsi</group>
 					<group>kecamatan</group>
 					<group>pantai</group>
@@ -34,13 +29,6 @@
 					<group>jalan_kecamatan</group>
 					<group>rel</group>
 					<group>sungai</group>
-=======
-                    <group>countries</group>
-                    <group>cities10000eu</group>
-                </category>
-                <category name="cat_nature">
-                    <group>rivers</group>
->>>>>>> origin/master
                 </category>
                 <category name="cat_raster">
                     <group>dem</group>
@@ -48,7 +36,6 @@
                 </category>
             </categories>
             <allGroups>
-<<<<<<< HEAD
                 <group>provinsi</group>
 				<group>kecamatan</group>
                 <group>jalan</group>
@@ -67,17 +54,6 @@
 				<group>pantai</group>
 				<group>goa</group>
 				<group>sungai</group>
-=======
-                <group>countries</group>
-                <group>cities10000eu</group>
-                <group>dem</group>
-                <group>rivers</group>
-                <group>jpl_wms_global_mosaic</group>
-            </allGroups>
-            <defGroups>
-                <group>countries</group>
-                <group>cities10000eu</group>
->>>>>>> origin/master
             </defGroups>
             <layerAutoRefresh>1</layerAutoRefresh>
             <imgFormat>png8</imgFormat>

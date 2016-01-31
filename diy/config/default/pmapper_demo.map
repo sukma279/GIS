@@ -17,19 +17,11 @@
 # Start of map file  
 #
 MAP
-<<<<<<< HEAD
 EXTENT  389896.47 9091925.60 482524.18 9167474.28
  
 #UNITS meters
 #EXTENT -15 30 40 70
 UNITS meters
-=======
-EXTENT  1988372 1400000 6411627 5400000 
- 
-UNITS meters
-#EXTENT -15 30 40 70
-#UNITS dd
->>>>>>> origin/master
 SIZE 600 500
 SHAPEPATH "../../../pmapper_demodata"
 SYMBOLSET "../common/symbols/symbols-pmapper.sym"   
@@ -41,11 +33,7 @@ INTERLACE OFF
 PROJECTION
   # ETRS-LAEA
   #"init=epsg:3035"
-<<<<<<< HEAD
   "+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs"
-=======
-  "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs  no_defs"
->>>>>>> origin/master
 END  
 
 
@@ -69,11 +57,7 @@ END  # Web
 # Start of Reference map definition
 #
 REFERENCE
-<<<<<<< HEAD
   EXTENT 389896.47 9091925.60 482524.18 9167474.28
-=======
-  EXTENT 1496247 1332616 7055632 5502154 #2200000 1400000 8000000 5400000
->>>>>>> origin/master
   IMAGE "../../images/reference.png"
   SIZE 199 149
   COLOR -1 -1 -1
@@ -157,7 +141,6 @@ END
 
 
 LAYER
-<<<<<<< HEAD
   NAME "provinsi"
   LABELITEM "kabupaten"
   TYPE polygon
@@ -255,30 +238,11 @@ LAYER
 	 FONT FreeSans
 	 SIZE 8
 	END
-=======
-  NAME "jpl_wms_global_mosaic"
-  TYPE RASTER
-  STATUS OFF
-  CONNECTION "http://wms.jpl.nasa.gov/wms.cgi?"
-  CONNECTIONTYPE WMS
-  PROJECTION
-    #"init=epsg:4326"
-    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs"
-  END
-  METADATA
-    "DESCRIPTION"         "JPL Global Mosaic (WMS)"
-    "wms_name"            "global_mosaic_base"
-    "wms_style"           "visual"
-    "wms_server_version"  "1.1.1"
-    "wms_format"          "image/jpeg"
-    "ows_title"           "jpl_wms_global_mosaic"
->>>>>>> origin/master
   END
 END
 
 
 
-<<<<<<< HEAD
 
 #
 # Jalan
@@ -480,159 +444,11 @@ LAYER
   CONNECTION "host=localhost dbname=jogja user=postgres password=seeyou port=5432"
   DATA "geom FROM public.jalan"
   FILTER "label LIKE '%Jl. %'"
-=======
-#
-# LAYER DGM
-#
-LAYER
-  NAME "dem"
-  TYPE Raster
-  STATUS OFF
-  DATA 'europa_dem.jpg'
-  MINSCALE 3000000
-  PROJECTION
-    #"init=epsg:4326"
-    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs"
-  END
-  METADATA
-    "DESCRIPTION"   "NGDC Shaded  relief"
-    "LEGENDICON"    "images/legend/dem.png"
-    "ows_title"     "dem"
-  END
-END
-
-
-
- 
-#
-# Start of Layer Countries.shp
-#
-LAYER
-  NAME "countries"
-  TYPE polygon
-  DATA "countries"
-  TRANSPARENCY 30
-  TEMPLATE void
-  PROJECTION
-    #"init=epsg:4326"
-    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs"
-  END
-  METADATA 
-    "DESCRIPTION" "Countries"
-    ## ADAPTED TO MULTILINGUAL SHAPEFILE
-    "RESULT_FIELDS" "ISOCODE,@default:NAME_EN@de:NAME_DE@it:NAME_IT@fr:NAME_FR@br:NAME_BR@es:NAME_ES,@default:CAPITAL_EN@de:CAPITAL_DE@it:CAPITAL_IT@fr:CAPITAL_FR@br:CAPITAL_BR@es:CAPITAL_ES,AREA_KM2,POPULATION"
-    "RESULT_HEADERS" "ISO Code,Name,Capital,Area,Population"
-    "ows_title"      "countries"
-  END  # Metadata 
-  CLASS
-    Name 'Countries'
-    COLOR 200 254 199
-    OUTLINECOLOR 0 0 0
-  END  # Class
-END  # Layer
-
-
-
-LAYER
-  NAME "cities10000eu" 
-  TYPE point
-  DATA "cities10000eu"
-  TOLERANCE 6
-  TOLERANCEUNITS pixels
-  LABELITEM "NAME"
-  LABELMAXSCALE 8000000
-  TEMPLATE void
-  PROJECTION
-    #"init=epsg:4326"
-    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs"
-  END
-  METADATA 
-    "DESCRIPTION" "Cities"
-    "RESULT_FIELDS" "NAME, ISO2_CODE, POPULATION, GTOPO30"
-    "RESULT_HEADERS" "Name,Country,Inhabitants,Altitude"
-    "RESULT_HYPERLINK" "NAME"
-    "LAYER_ENCODING" "UTF-8"
-    "ows_title"      "cities1000"
-  END  # Metadata  
-  
-  CLASS
-    NAME "> 1'000'000"
-    EXPRESSION ([POPULATION] > 1000000)
-    COLOR 255 0 0 
-    OUTLINECOLOR 0 0 0 
-    SYMBOL 'square' 
-    SIZE 9
-    LABEL
-      POSITION Auto
-      COLOR 0 0 150 
-      BUFFER 2
-      TYPE truetype
-      ENCODING "UTF-8"
-      FONT FreeSans
-      SIZE 8
-      MAXSIZE 9
-      #SIZE small
-    END #Label  
-  END  # Class
-  CLASS
-    NAME "500'000 - 1'000'000"
-    EXPRESSION ([POPULATION] <= 1000000 AND [POPULATION] > 500000)
-    COLOR 255 0 0
-    SYMBOL 'circle' 
-    SIZE 8
-    LABEL
-      POSITION Auto
-      COLOR 0 0 150 
-      BUFFER 2
-      TYPE truetype
-      ENCODING "UTF-8"
-      FONT FreeSans
-      SIZE 8
-      MAXSIZE 9
-      #SIZE small
-    END #Label  
-  END  # Class
-  CLASS
-    NAME "100'000 - 500'000"
-    EXPRESSION ([POPULATION] <= 500000 AND [POPULATION] > 100000)
-    COLOR 255 0 0
-    SYMBOL 'square' 
-    SIZE 5
-  END  # Class
-  CLASS
-    NAME "50'000 - 100'000"
-    EXPRESSION ([POPULATION] <= 100000 AND [POPULATION] > 50000)
-    COLOR 0 0 0
-    SYMBOL 'square' 
-    SIZE 4
-    #MAXSCALE 20000000
-  END  # Class
-  CLASS
-    NAME "10'000 - 50'000"
-    EXPRESSION ([POPULATION] <= 50000 AND [POPULATION] > 10000)
-    COLOR 100 100 100
-    SYMBOL 'circle' 
-    SIZE 3
-    #MAXSCALE 10000000
-  END  # Class
-
-END  # Layer
-
-
-#
-# Start of Layer Rivers.shp
-#
-LAYER
-  NAME "rivers"
-  TYPE line
-  DATA "rivers"
->>>>>>> origin/master
   TOLERANCE 3
   TOLERANCEUNITS pixels
   TEMPLATE void
   PROJECTION
     #"init=epsg:4326"
-<<<<<<< HEAD
     "+proj=longlat +datum=WGS84 +no_defs"
   END
   METADATA
@@ -687,21 +503,6 @@ LAYER
 	END
   END
 END
-=======
-    "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs  no_defs"
-  END
-  METADATA 
-    "DESCRIPTION" "Rivers"
-    "RESULT_FIELDS" "NAME"
-    "RESULT_HEADERS" "Name"
-    "ows_title"      "cities"
-  END  # Metadata 
-  CLASS
-    Name 'Rivers'
-    COLOR 0 0 255
-  END  # Class
-END  # Layer
->>>>>>> origin/master
 
 
 
